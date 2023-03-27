@@ -10,8 +10,6 @@ class MailMail(models.Model):
             if not mail.mail_server_id or not emails or mail.mail_server_id.smtp_user != emails[0]:
                 mail_server = self.env['ir.mail_server'].sudo().search([('smtp_user','=',emails[0])],limit=1)
                 if not mail_server:
-                    mail_server = self.env['ir.mail_server'].sudo().search([('smtp_user','=',self.env.company.email)],limit=1)
-                if not mail_server:
                     mail_server = self.env['ir.mail_server'].sudo().search([],limit=1)
                 if mail_server:
                     mail.mail_server_id = mail_server.id
